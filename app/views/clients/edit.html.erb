@@ -1,29 +1,43 @@
-
-        <%= turbo_frame_tag "edit #{@client.id}" do %>    
-        <%= form_with model: @client do |form|%>
-        <div >
-            <div class="flex flex-row  grid grid-cols-6 mx-2 bg-white border-b font-medium text-gray-900 ">
-                 <div  class="py-4  ">
-                    <%= form.text_field :name, class:"bg-gray-50 w-4/5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
-                </div>
-                <div  class=" py-4  ">
-                    <%= form.text_field :surname, class:"bg-gray-50 w-4/5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
-                </div>
-                <div class=" py-4">
-                    <%= form.text_field :phone_number, class:"bg-gray-50  w-4/5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
-                </div>
-                <div  class=" py-4  ">
-                    <%= form.text_field :email, class:"bg-gray-50 border  w-4/5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
-                </div>
-
-                <div class="py-4">
-                    <%= form.text_field :comments, class:"bg-gray-50 w-4/5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
-                </div>
-                <div class="py-4">
-                      <%= form.submit 'update' , class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
-
-                </div>
-            </div>
-        </div>
-        <% end %>
-        <% end %>
+<%= turbo_frame_tag "edit" do %>    
+    <%= form_with model: @client do |form|%>
+     <div class="flex flex-row ">
+         <div class="border p-4 border-gray-300 rounded-lg max-w-lg mb-2 shadow shadow-lg">   
+            <section class="bg-white max-w-xl">
+                <div class="">
+                  <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Client</h2>
+                      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                          <div class="w-full">
+                            <%= form.label :name, class:"block mb-2 text-sm font-medium text-gray-900" %>
+                            <%= form.text_field :name, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder:"Name" %>
+                          </div>
+                          <div class="w-full">
+                            <%= form.label :surname, class:"block mb-2 text-sm font-medium text-gray-900" %>
+                            <%= form.text_field :surname, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder:"Name" %>
+                          </div>
+                          <div class="w-full">
+                            <%= form.label :phone_number, class:"block mb-2 text-sm font-medium text-gray-900" %>
+                            <%= form.text_field :phone_number, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder:"Name" %>
+                          </div>
+                          <div class="w-full">
+                            <%= form.label :email, class:"block mb-2 text-sm font-medium text-gray-900" %>
+                            <%= form.text_field :email, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder:"Name" %>
+                          </div>
+                          <div class="sm:col-span-2">
+                            <%= form.label :comments ,class: "block mb-2 text-sm font-medium text-gray-900 " %>
+                            <%= form.text_area :comments ,class: "block p-2.5 max-h-16 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 ", placeholder:"Comments" %>
+                          </div>
+                      </div>
+                      <div class="flex my-2 justify-between">
+                          <%= link_to 'delete client', client_path(@client.id), class:"py-2.5 px-5  mb-2 text-sm font-medium text-red-600 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200", data:{turbo_method: "delete", turbo_confirm: "delete?"} %> 
+                          <%= form.submit 'OK' , class:"py-2.5 px-5  mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
+                    </div>
+              </div>
+            </section>
+         </div>
+         <div class="border p-4 border-gray-300 rounded-lg max-w-lg mb-2 shadow shadow-lg ml-10">   
+                <h1>Histori clients jobs</h1>
+                <p>Exampleeeeeeeeeeeeeeeeeeeeeee</p>
+         </div>  
+       </div>        
+    <% end %>
+<% end %>

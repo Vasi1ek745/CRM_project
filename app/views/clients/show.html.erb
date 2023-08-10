@@ -1,13 +1,39 @@
  <%= turbo_frame_tag "show" do %> 
 
- <div class="m-5">
-    <div  class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100">
-        <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="/docs/images/blog/image-4.jpg" alt="">
-        <div class="flex flex-col justify-between p-4 leading-normal">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= @client.name %> <%= @client.surname %></h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-        </div>
-    </div>
+ <div class="">
+    <section class="bg-white max-w-xl">
+    <div class="">
+      <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Show Client</h2>
+      <form action="#">
+          <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+              <div class="w-full">
+                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
+                  <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Name">
+              </div>
+              <div class="w-full">
+                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 ">Surname</label>
+                  <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Surname">
+              </div>
+              <div class="w-full">
+                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+                  <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Email">
+              </div>
+                <div class="w-full">
+                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 ">Messenger</label>
+                  <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Messenger">
+              </div>
+              <div class="sm:col-span-2">
+                  <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">Comments</label>
+                  <textarea id="description" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Comments"></textarea>
+              </div>
+          </div>
+          <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+              Add product
+          </button>
+      </form>
+  </div>
+</section>
+
 
 </div>
 
