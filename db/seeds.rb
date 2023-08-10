@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+
+	# 20.times do
+	# 	Client.create(
+	# 		name: FFaker::NameRU.first_name,
+	# 		surname: FFaker::NameRU.last_name,
+	# 		phone_number: FFaker::PhoneNumberRU.mobile_phone_number,
+	# 		email: FFaker::Internet.email,
+	# 		)
+
+	Client.all.each do |client| 
+	 messenger = [FFaker::Food.fruit, FFaker::Food.meat, FFaker::FoodPL.diary, FFaker::Food.vegetable].sample
+		client.update(messenger: messenger)
+
+
+	end
+

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date_time: 2023-07-20 16:13:09
+  cost: 1
+  comments: MyString
+
+two:
+  name: MyString
+  date_time: 2023-07-20 16:13:09
+  cost: 1
+  comments: MyString

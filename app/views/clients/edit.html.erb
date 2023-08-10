@@ -1,0 +1,29 @@
+
+        <%= turbo_frame_tag "edit #{@client.id}" do %>    
+        <%= form_with model: @client do |form|%>
+        <div >
+            <div class="flex flex-row  grid grid-cols-6 mx-2 bg-white border-b font-medium text-gray-900 ">
+                 <div  class="py-4  ">
+                    <%= form.text_field :name, class:"bg-gray-50 w-4/5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
+                </div>
+                <div  class=" py-4  ">
+                    <%= form.text_field :surname, class:"bg-gray-50 w-4/5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
+                </div>
+                <div class=" py-4">
+                    <%= form.text_field :phone_number, class:"bg-gray-50  w-4/5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
+                </div>
+                <div  class=" py-4  ">
+                    <%= form.text_field :email, class:"bg-gray-50 border  w-4/5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
+                </div>
+
+                <div class="py-4">
+                    <%= form.text_field :comments, class:"bg-gray-50 w-4/5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block" %>
+                </div>
+                <div class="py-4">
+                      <%= form.submit 'update' , class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
+
+                </div>
+            </div>
+        </div>
+        <% end %>
+        <% end %>

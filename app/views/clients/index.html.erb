@@ -1,0 +1,63 @@
+<%= turbo_frame_tag "clients"  do %>
+<%= turbo_frame_tag "show", data: {turbo_action: 'advance'} do %>  
+<% end %>
+<div >
+    <div class="flex flex-col  w-full text-sm text-left text-gray-500 ">
+            <div class="flex flex-row grid grid-cols-6 mx-2 text-xs text-gray-700 uppercase bg-gray-100 ">
+                <div  class=" py-3">
+                    name
+                </div>
+                <div  class="py-3">
+                    surname
+                </div>
+                <div  class="py-3">
+                    phone_number
+                </div>
+                <div  class="py-3">
+                    email
+                </div>   
+
+                 <div  class="py-3">
+                    comments
+                </div>
+                 <div  class=" py-3">
+                    actions
+                </div>
+            </div>
+
+        <% @clients.each do |client| %>
+        <%= turbo_frame_tag "edit #{client.id}", data: {turbo_action: 'advance'}  do %>  
+        <div >
+            <div class="flex flex-row  grid grid-cols-6 mx-2 bg-white border-b font-medium text-gray-900 ">
+                 <div  class="py-4  ">
+                    <%= client.name %>
+                </div>
+                <div  class=" py-4  ">
+                    <%= client.surname %>
+                </div>
+                <div class=" py-4">
+                    <%= client.phone_number %>
+                </div>
+                <div  class=" py-4  ">
+                    <%= client.email %>
+                </div>
+
+                <div class="py-4">
+                    <%= client.comments %>
+                </div>
+                <div class="py-4">
+                    <div class="inline-flex rounded-md shadow-sm">
+                    <%= link_to 'show', client_path(client.id), class:"px-4  text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 ", "data-turbo-frame":"show" %> 
+                    <%= link_to 'edit', edit_client_path(client.id), class:"px-4 font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 " %> 
+                    <%= link_to 'delete', client_path(client.id), class:"px-4  text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 ", data:{turbo_method: "delete", turbo_confirm: "delete?"} %> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+        <% end %>
+    </div>
+</div>
+
+<% end %>
+
