@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   def index
-    @clients = Client.all
+    @clients = Client.order(created_at: :desc)
   end
   def show
     @client = Client.find(params[:id])
@@ -12,11 +12,8 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
-    if @client.save
-      redirect_to root_path
-    else 
-      render :new
-    end
+     @client.save
+    
   end
 
   def edit
@@ -32,7 +29,7 @@ class ClientsController < ApplicationController
   def destroy
     @client = Client.find(params[:id])
     @client.delete
-    redirect_to clients_path
+
   end
 
 
