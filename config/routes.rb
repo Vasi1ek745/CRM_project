@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get "/main_page", to: "main_page#index"
   get "/main_page/about", to: "main_page#about"
+  get "/jobs", to: "jobs#index"
 
 
 end

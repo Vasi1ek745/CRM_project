@@ -29,22 +29,32 @@
                       </div>
                       <% if button == "edit" %>
                       <div class="flex my-2 justify-between">
-                           <%= link_to 'delete client', client_path(@client.id), class:"py-2.5 px-5  mb-2 text-sm font-medium text-red-600 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200", data:{turbo_method: "delete", turbo_confirm: "delete?"} %> 
+                           <%= link_to 'delete client', client_path(@client.id), class:"py-2.5 px-5  mb-2 text-sm font-medium text-red-600 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200", data:{turbo_method: "delete", turbo_confirm: "delete?", turbo_frame: "_top"} %> 
                           <%= form.submit 'OK' ,data:{turbo_frame: "_top"}, class:"pt-2.5 px-5  mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
                       </div>
                         <% else  %>
                       <div class="flex my-2 justify-end">
                   
-                          <%= form.submit 'OK' , class:"pt-2.5 px-5  mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
+                          <%= form.submit 'OK' , class:"pt-2.5 px-5  mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" ,data:{turbo_frame: "_top"} %>
                       </div>
                       <% end  %>
 
               </div>
             </section>
          </div>
-         <div class="border p-4 border-gray-300 rounded-lg max-w-lg mb-2 shadow shadow-lg ml-10">   
-                <h1>Histori clients jobs</h1>
-                <p>Exampleeeeeeeeeeeeeeeeeeeeeee</p>
+         <div class="border p-4 border-gray-300 rounded-lg max-w-lg mb-2 shadow shadow-lg ml-10">  
+            <h1>List clients Jobs</h1> 
+            <% if @jobs != nil %>
+              <ul>
+            <% @jobs.each do |job| %>
+                <li>
+                <h1><%= job.name %></h1>
+                <p><%= job.date_time %></p>
+                </li>
+              <% end %>
+              </ul>
+              <% end %>
+
          </div>  
        </div>        
     <% end %>

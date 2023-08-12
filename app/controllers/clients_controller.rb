@@ -13,11 +13,12 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
      @client.save
-    
+    redirect_to clients_path
   end
 
   def edit
       @client = Client.find(params[:id])
+      @jobs = @client.jobs.order(date_time: :asc)
   end
 
   def update
@@ -28,7 +29,10 @@ class ClientsController < ApplicationController
 
   def destroy
     @client = Client.find(params[:id])
+    @client.jobs.delete_all
     @client.delete
+
+    redirect_to clients_path
 
   end
 

@@ -49,3 +49,5 @@ end
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "ffaker", "~> 2.21"
+
+gem "faker", "~> 3.2"
