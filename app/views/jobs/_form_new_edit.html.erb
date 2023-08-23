@@ -1,0 +1,73 @@
+<%= form_with model: [@client, @job] do |form| %>
+<div class="border-y shadow   px-5">
+
+<div class="m-5 grid grid-cols-2 ">
+
+    <div class="flex flex-row space-x-4 ">
+      
+        <div class="flex flex-col w-32 text-lg font-normal text-gray-500 justify-around ">
+             <p class="mb-2  leading-none text-gray-900 ">Date</p>
+           <div>
+               <%= form.date_field :date, class:"w-36 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5", placeholder:"Select date",required:"true"  %>
+           </div>
+
+
+            <p class="mb-2  leading-none text-gray-900 ">Start</p>
+           <div class="flex flex-row ">
+             <%= form.select :hour, (6..23).to_a.map{|x| x = [x, x.to_s]}, {selected:@job.start_time&.strftime("%H")}, class: "w-16 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"  %> 
+              <%= form.select :minute, [0,15,30,45].map{|x| x = [x, x.to_s]},{selected:@job.start_time&.strftime("%M")}, selected: "00" ,class: "w-16 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" %>
+           </div>
+           <p class="mb-2  leading-none text-gray-900 ">Duration(in hour)</p>
+            <%= form.text_field :duration, class:"mb-4 font-light text-gray-500 rounded-lg w-16",  placeholder:"h",required:"true" %>
+        </div>
+
+
+
+
+      <div class="py-8 px-4   ">
+          <%= form.text_field :name , class:" text-xl font-semibold leading-none text-gray-900 rounded-lg",  placeholder:"Job name" %>
+          <dl>
+              <dt class="mb-2 font-semibold leading-none text-gray-900 ">Comments:</dt>
+              <dd class="mb-4  text-gray-600  "><%= form.text_field :comments, class:"mb-2 text-gray-600 rounded-lg ",  placeholder:"comments" %></dd>
+          </dl>
+          <dl class="flex items-center space-x-6">
+              <div>
+                  <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Place</dt>
+                  <%= form.text_field :place, class:"mb-4 font-light text-gray-500 rounded-lg ",  placeholder:"place" %>
+              </div>
+              <div>
+                  <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Cost</dt>
+                  <%= form.text_field :cost, class:"mb-4 font-light text-gray-500 rounded-lg w-16",  placeholder:"$" %>
+              </div>
+          </dl>
+          <div class="flex items-center space-x-3">
+                <%= form.submit 'create', class:"text-white inline-flex items-center bg-blue-500 hover:bg-sky-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center", data: {turbo_frame: "_top"} %> 
+          </div>
+      </div>
+
+
+     </div> 
+       
+        <div class=" flex flex-col border  justify-around rounded-lg bg-gray-50  w-80 h-48 p-4 mt-6">
+
+            <label  class="block mb-2 text-sm font-medium text-gray-900 ">Client</label>
+
+            
+
+            <%= form.collection_select :client_id, @clients, :id, :name, {}, class: "w-16 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"   %> 
+
+
+           <div class="text-gray-500 " >
+                Contacts:
+            </div>
+            <div class="text-lg text-gray-800" >
+                <%= @client.email %>
+                <%= @client.phone_number %>
+
+            </div>
+        </div>   
+
+
+  </div>
+</div>
+  <% end %>

@@ -1,0 +1,135 @@
+
+
+<div class="">
+
+  
+  
+   <!-- head -->
+
+   <div class="flex flex-row space-x-4">   
+      <div class="flex flex-row space-x-3">
+
+        <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-gray-200" %>
+
+        <%= link_to(calendar.url_for_previous_view, class: "p-2 rounded-full hover:bg-gray-200 focus:ring-gray-200 ") do %>
+            <svg class="w-[18px] h-[18px] text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"/>
+              </svg>
+        <% end %>
+
+        <%= link_to(calendar.url_for_next_view, class: "p-2 rounded-full hover:bg-gray-200 focus:ring-gray-200 " )  do %>
+             <svg class="w-[18px] h-[18px] text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
+          </svg>
+        <% end %>
+      
+      </div>
+ 
+      <div class="text-2xl font-normal font-sans text-gray-700 flex flex-row space-x-4">
+          <% month = calendar.date_range.map {|day| day.strftime("%B")}.uniq %>
+          <% if month[1] %>
+          <div>
+              <%= month[0] %> - <%= month[1] %>
+          </div>
+          <% else %>
+           <div>
+              <%= month[0]  %>
+          </div>
+          <% end %>
+          <div>
+            <%= calendar.date_range[0].strftime("%Y") %>
+          </div>
+      </div>
+
+      <div class="flex justify-center ">
+         <%= link_to 'Add Job' , new_client_job_path(@client.id), class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-gray-200", 
+                 data: {modal_toggle:"defaultModal", turbo_frame:"new"} %>
+      </div>
+
+  </div>
+
+ 
+
+  <!-- head end -->
+
+
+
+  <!-- table -->
+
+  <div class="flex flex-col" >    
+  <!-- table head -->
+    <div class="grid grid-cols-8   text-md text-gray-700  bg-gray-100">
+
+      <div>
+
+      </div>
+
+      <% date_range.slice(0, 7).each do |day| %>
+        <% class_for_today = "bg-blue-300 mx-14"    if day == Date.current %>
+        <div class="my-1 flex flex-col border-x justify-center">
+          <div class="flex justify-center ">
+             <%= day.strftime("%a") %> 
+          </div>
+          <div class="flex justify-center text-2xl rounded-full <%= class_for_today %> ">
+             <%= day.strftime("%d") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+<!-- end table head -->
+
+
+  <!-- job_start -->
+ 
+  <% date_range.each_slice(7) do |week| %>
+
+    <!-- week -->
+    <% (6..23).each do |h|%>
+      <div class="grid grid-cols-8   ">
+
+          <div class="border flex justify-center">
+            <%= "#{h}.00" %>
+          </div>
+
+          <% week.each do |day| %>
+          <% job_day = @jobs.find_all{|job| job.date.strftime("%y%m%d") == day.strftime("%y%m%d")} %>
+            <div class="border flex justify-center flex flex-col">
+              <% job_day.find_all{|job| job.start_time.strftime("%H") == h.to_s}.each do |job| %>
+                 <%= link_to(edit_client_job_path(job.client.id,job.id) , class:"bg-green-200 hover:bg-green-800 focus:ring-gray-200", 
+                 data: {modal_toggle:"defaultModal", turbo_frame:"edit"}) do%>
+                <div class="">
+                    <%= job.name %>
+                </div>
+                  <% end %>
+              <% end %>
+            </div>
+          <% end %>
+      
+      </div>
+    <% end %>
+  <% end %>
+         
+
+</div>
+    
+
+
+
+<!-- Modal toggle -->
+
+
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+           <div class="relative p-4 bg-white rounded-lg shadow ">
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            <!-- Modal header -->
+            
+                <%= turbo_frame_tag "new" %>
+                <%= turbo_frame_tag "edit" %>
+            
+            <!-- Modal body -->
+          </div>
+</div>

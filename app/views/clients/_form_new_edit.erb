@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "edit" do %>    
     <%= form_with model: @client do |form|%>
-     <div class="my-2 flex flex-row ">
+     <div class="my-2 flex flex-row " id = 1>
          <div class="border p-4 border-gray-300 rounded-lg max-w-lg mb-2 shadow shadow-lg">   
             <section class="bg-white max-w-xl">
                 <div class="">
@@ -10,11 +10,7 @@
                             <%= form.label :name, class:"block mb-2 text-sm font-medium text-gray-900" %>
                             <%= form.text_field :name, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder:"Name" %>
                           </div>
-                          <div class="w-full">
-                            <%= form.label :surname, class:"block mb-2 text-sm font-medium text-gray-900" %>
-                            <%= form.text_field :surname, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder:"surname" %>
-                          </div>
-                          <div class="w-full">
+                           <div class="w-full">
                             <%= form.label :phone_number, class:"block mb-2 text-sm font-medium text-gray-900" %>
                             <%= form.text_field :phone_number, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", placeholder:"phone_number" %>
                           </div>
@@ -42,19 +38,18 @@
               </div>
             </section>
          </div>
-         <div class="border p-4 border-gray-300 rounded-lg max-w-lg mb-2 shadow shadow-lg ml-10">  
-            <h1>List clients Jobs</h1> 
-            <% if @jobs != nil %>
-              <ul>
+         <div class="border p-4 border-gray-300 rounded-lg max-w-lg mb-2 shadow shadow-lg ml-10"> 
+            <div>
+                <h1 class="text-2xl font-semibold mb-4"> Jobs list :</h1> 
+            </div> 
             <% @jobs.each do |job| %>
-                <li>
-                <h1><%= job.name %></h1>
-                <p><%= job.date_time %></p>
-                </li>
-              <% end %>
-              </ul>
-              <% end %>
-
+            <dl class="max-w-md text-gray-900 divide-y divide-gray-200 ">
+                <div class="flex flex-col pb-3">
+                    <dt class="mb-1 text-gray-500 md:text-lg "><%= job.name %></dt>
+                    <dd class="text-lg font-semibold"><%= job.date.strftime("%d.%m.%y") %>   <%= job.start_time.strftime("%H:%M") %> - <%= (job.start_time + job.duration).strftime("%H:%M") %></dd>
+                </div>
+            </dl>
+            <% end %>
          </div>  
        </div>        
     <% end %>

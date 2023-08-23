@@ -1,6 +1,9 @@
 class ClientsController < ApplicationController
   def index
-    @clients = Client.order(created_at: :desc)
+
+    @pagy,@clients = pagy(Client.order(created_at: :desc), items: 9)
+
+    # @clients = Client.order(created_at: :desc)
   end
   def show
     @client = Client.find(params[:id])
@@ -18,7 +21,7 @@ class ClientsController < ApplicationController
 
   def edit
       @client = Client.find(params[:id])
-      @jobs = @client.jobs.order(date_time: :asc)
+      @jobs = @client.jobs.order(:date)
   end
 
   def update

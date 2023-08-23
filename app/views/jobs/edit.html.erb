@@ -1,4 +1,6 @@
-<div>
-  <h1 class="font-bold text-4xl">Jobs#edit</h1>
-  <p>Find me in app/views/jobs/edit.html.erb</p>
-</div>
+<%= turbo_frame_tag "edit" do %>
+
+
+     <%= render 'jobs/form_new_edit' %>
+ 
+ <% end %> 

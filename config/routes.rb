@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+  get 'jobs/calendar', to: "jobs#calendar"
 
   root "main_page#index"
 
