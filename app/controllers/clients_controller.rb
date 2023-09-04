@@ -14,9 +14,17 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client = Client.new(client_params)
-     @client.save
-    redirect_to clients_path
+    @client = Client.create(client_params)
+     if @client.save
+        redirect_to clients_path
+        flash.now["success"] = "Client create!"
+    else
+
+        @errors = @client.errors
+        flash.now["warning"] = "Errors!"
+        render :new
+    end
+
   end
 
   def edit
@@ -36,6 +44,7 @@ class ClientsController < ApplicationController
     @client.delete
 
     redirect_to clients_path
+    flash["danger"] = "Client delete"
 
   end
 

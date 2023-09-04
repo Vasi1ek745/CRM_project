@@ -1,11 +1,10 @@
     
-    <%= turbo_frame_tag "new" do %>
-    <div class="my-4 flex justify-start">
-        <%= link_to 'Add Job' , new_client_job_path(@client.id), class: "py-2.5 px-5 mx-6 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
+    <%= turbo_frame_tag "new" do  %>
+    
+    <%= render "jobs/header_jobs" %>
 
-    </div>
-   <%  end %>
-   
+    <% end %>
+
 
     <%= render "jobs/jobs_list" %>
 

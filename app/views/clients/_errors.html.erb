@@ -1,0 +1,15 @@
+<% if @client.errors.any? %>
+  <div class = "flex flex-col m-2 p-2 px-4 text-red-500  " id="error_explanation" data-turbo-cache="false">
+    <h2 , class="text-xl" >
+      <%= I18n.t("errors.messages.not_saved",
+                 count: @client.errors.count,
+                 resource: @client.class.model_name.human.downcase)
+       %>
+    </h2>
+    <ul class="list-disc m-2 text-red-500">
+      <% @client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

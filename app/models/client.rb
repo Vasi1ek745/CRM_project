@@ -2,7 +2,7 @@ class Client < ApplicationRecord
 
 	has_many :jobs, dependent: :destroy
 
-	validates :name, presence: true
+	validates :name, presence: true, uniqueness: true
 
 
 

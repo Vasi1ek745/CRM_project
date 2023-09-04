@@ -1,7 +1,14 @@
 class JobsController < ApplicationController
   def index
-    @jobs = Job.all.order(:date)
- 
+
+    if params[:show_past_jobs] == 0
+      @jobs = Job.order(:date)
+    else     
+      @jobs = Job.where("date >= ? ", Date.current ).order(:date)
+    end
+    
+    @job = Job.new
+    
     @client = Client.last
     
   end
@@ -60,6 +67,7 @@ class JobsController < ApplicationController
 
 
   private
+   
     def job_form
       h = params.require(:job).permit(:name,:cost, :place, :comments, :client_id, :date, :hour,:minute, :duration) 
       h[:start_time] = Time.at(3600*h[:hour].to_i + 60*h[:minute].to_i)

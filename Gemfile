@@ -54,3 +54,5 @@ gem "json", "~> 2.6"
 gem "pagy", "~> 6.0"
 
 gem "simple_calendar", "~> 3.0"
+
+gem "devise", "~> 4.9"

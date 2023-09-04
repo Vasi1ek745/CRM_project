@@ -1,3 +1,4 @@
+<%= render 'clients/errors' %>
 <%= turbo_frame_tag "edit" do %>    
     <%= form_with model: @client do |form|%>
      <div class="my-2 flex flex-row " id = 1>
@@ -38,6 +39,7 @@
               </div>
             </section>
          </div>
+         <% if @jobs %>
          <div class="border p-4 border-gray-300 rounded-lg max-w-lg mb-2 shadow shadow-lg ml-10"> 
             <div>
                 <h1 class="text-2xl font-semibold mb-4"> Jobs list :</h1> 
@@ -51,6 +53,7 @@
             </dl>
             <% end %>
          </div>  
+         <% end %>
        </div>        
     <% end %>
 <% end %>
