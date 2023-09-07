@@ -1,10 +1,16 @@
 class ClientsController < ApplicationController
+  before_action :user
+
+  
   def index
-
-    @pagy,@clients = pagy(Client.order(created_at: :desc), items: 9)
-
+    
+    if user_signed_in?
+      @pagy,@clients = pagy(@user.clients.order(created_at: :desc), items: 9) 
+    end
     # @clients = Client.order(created_at: :desc)
   end
+
+
   def show
     @client = Client.find(params[:id])
   end
@@ -14,14 +20,13 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client = Client.create(client_params)
+    @client = Client.create(client_params.merge({user_id: @user.id}))
      if @client.save
         redirect_to clients_path
-        flash.now["success"] = "Client create!"
+        flash["success"] = "Client create!"
     else
-
         @errors = @client.errors
-        flash.now["warning"] = "Errors!"
+        flash["warning"] = "Errors!"
         render :new
     end
 
@@ -52,5 +57,8 @@ class ClientsController < ApplicationController
   private
     def client_params
       params.require(:client).permit(:name,:surname, :phone_number, :email, :comments)
+    end
+    def user
+      @user = current_user
     end
 end

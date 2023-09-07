@@ -91,14 +91,17 @@
             <%= "#{h}.00" %>
           </div>
 
+
+
           <% week.each do |day| %>
           <% job_day = @jobs.find_all{|job| job.date.strftime("%y%m%d") == day.strftime("%y%m%d")} %>
             <div class="border flex justify-center flex flex-col">
               <% job_day.find_all{|job| job.start_time.strftime("%H") == h.to_s}.each do |job| %>
-                 <%= link_to(edit_client_job_path(job.client.id,job.id) , class:"bg-green-200 hover:bg-green-800 focus:ring-gray-200", 
+                 <%= link_to(edit_client_job_path(job.client.id,job.id) , class:"rounded bg-green-200 hover:bg-green-400 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none", 
                  data: {modal_toggle:"defaultModal", turbo_frame:"edit"}) do%>
-                <div class="">
-                    <%= job.name %>
+                <div class="flex flex-col">
+                  <h1> <%= job.client.name %></h1>
+                  <h1> <%= job.name %></h1>
                 </div>
                   <% end %>
               <% end %>

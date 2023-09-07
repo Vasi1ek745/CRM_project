@@ -13,16 +13,18 @@
 			
 			phone_number: FFaker::PhoneNumberRU.mobile_phone_number,
 			email: FFaker::Internet.email,
-			comments: [FFaker::Food.fruit, FFaker::Food.meat, FFaker::FoodPL.diary, FFaker::Food.vegetable].sample
+			comments: [FFaker::Food.fruit, FFaker::Food.meat, FFaker::FoodPL.diary, FFaker::Food.vegetable].sample,
+			user_id:3
 			)
 		5.times do 
 			Client.last.jobs.create(
 				name: Faker::Company.catch_phrase,
 				date: Faker::Date.between(from: '2023-01-01', to: '2024-01-01') ,
 				start_time:Time.at(3600*rand(6..23)+60*[15,30,45].sample) ,
-				cost: rand(500),
+				cost: rand(1500),
 				place: Faker::Movies::HarryPotter.location,
-				duration: rand(5)
+				duration: rand(5),
+				user_id:3
 				) 
 		end
 	end

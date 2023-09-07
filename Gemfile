@@ -56,3 +56,5 @@ gem "pagy", "~> 6.0"
 gem "simple_calendar", "~> 3.0"
 
 gem "devise", "~> 4.9"
+
+gem "rubocop", "~> 1.56"
